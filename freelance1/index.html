@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Startup List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #e6f3ff;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .startup-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .startup-button {
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .startup-button:hover {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .startup-button.active {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .description-box {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            min-height: 60px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .description-box.visible {
+            opacity: 1;
+        }
+
+        .no-description {
+            font-style: italic;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Freelance Registered</h1>
+        <div class="description-box visible" id="descriptionBox">Click a startup to see its description</div>
+        <div class="startup-list" id="startupList"></div>
+    </div>
+
+    <script>
+        const startups = [
+            {title: 'Intern Loom - 71', description: 'Connecting Interns to Startups'}, 
+            {title: 'KICKSTER INDIA - 72', description: 'Buying and selling of sneakers and homegrown clothing brands'}, 
+            {title: 'Sleakwear - 73', description: 'Affordable, high-quality streetwear redefined'}, 
+            {title: 'StoriesByChildren - 74', description: 'Freelance Registered'}, 
+            {title: 'RDL TECHNOLOGIES PVT LTD - 75', description: 'Smart factory transformation with AI-driven manufacturing solutions'}, 
+            {title: 'The Waiter Company - 76', description: 'Automated inventory replenishment for seamless restaurant operations'}, 
+            {title: 'Atlaaya Design - 77', description: 'Architecture & BIM consultancy with green building expertise'}, 
+            {title: 'baeru - 78', description: 'Baeru links waste management with ocean health & livelihoods'}, 
+            {title: 'Esprit Analytique - 79', description: 'Esprit Analytique drives impact through AI & data'}, 
+            {title: 'wodeyar art - 80', description: 'Wodeyar Art crafts precision CNC & laser designs'}, 
+            {title: 'lyflynehealth - 81', description: 'One-stop platform for hospital & post-care needs'}, 
+            {title: 'Corpacademia ITechnovations Pvt Ltd - 82', description: 'CorpAcademia iTechnovations delivers IT solutions and training in cloud, AI, and virtual labs'}, 
+            {title: 'My Narrative - 83', description: 'Fashion-tech redefining style through stories'}, 
+            {title: 'Aarvath Mobitech Pvt Ltd - 84', description: 'Revolutionizing mobility with solar-powered vehicles'}, 
+            {title: 'BLUE-ARC - 85', description: 'Powering innovation with hardware, software, and networking'}, 
+            {title: 'Southpaw - 86', description: 'Freelance Registered'}, 
+            {title: 'Accolade Tech Solutions Private Limited - 87', description: 'Innovative tech solutions in mobile, web, AI, and Smart TV apps'}, 
+            {title: 'DendrixSemi Microtech - 88', description: 'Tech Services: SoC, Embedded Dev, AI & Strategy Consulting'}, 
+            {title: 'The Dexes Company - 89', description: 'Revolutionizing age-appropriate sex education through engaging e-learning'}, 
+            {title: 'Brown Collar - 90', description: 'Minimizing waste by repurposing workshop uniforms for first-year students'}, 
+            {title: 'Omnishakti.ai - 91', description: 'Freelance Registered'}, 
+            {title: 'Modicare - 92', description: 'India\'s first Direct Selling Company, empowering dreams for 25 years'}, 
+            {title: 'GREENAMOR VENTRUES - 93', description: 'They make sustainable packaging material'}, 
+            {title: 'Deeproot Workforce Dynamics - 94', description: 'Freelance Registered'}, 
+            {title: 'rosette - 95', description: 'Freelance Registered'}
+        ];
+
+        const startupList = document.getElementById("startupList");
+        const descriptionBox = document.getElementById("descriptionBox");
+        let activeButton = null;
+
+        // Show initial description box
+        descriptionBox.classList.add("visible");
+
+        startups.forEach(startup => {
+            const button = document.createElement("button");
+            button.className = "startup-button";
+            button.textContent = startup.title;
+            
+            button.addEventListener("click", () => {
+                if (activeButton) {
+                    activeButton.classList.remove("active");
+                }
+                button.classList.add("active");
+                activeButton = button;
+                
+                // Fade out
+                descriptionBox.classList.remove("visible");
+                
+                // Update content and fade in after a short delay
+                setTimeout(() => {
+                    if (startup.description) {
+                        descriptionBox.textContent = startup.description;
+                        descriptionBox.classList.remove("no-description");
+                    } else {
+                        descriptionBox.textContent = "No description available";
+                        descriptionBox.classList.add("no-description");
+                    }
+                    descriptionBox.classList.add("visible");
+                }, 300);
+            });
+            
+            startupList.appendChild(button);
+        });
+    </script>
+</body>
+</html>
