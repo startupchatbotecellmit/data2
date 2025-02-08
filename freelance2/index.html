@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Startup List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #e6f3ff;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .startup-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .startup-button {
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .startup-button:hover {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .startup-button.active {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .description-box {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            min-height: 60px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .description-box.visible {
+            opacity: 1;
+        }
+
+        .no-description {
+            font-style: italic;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Freelance Unregistered</h1>
+        <div class="description-box" id="descriptionBox">Click a startup to see its description</div>
+        <div class="startup-list" id="startupList"></div>
+    </div>
+
+    <script>
+        const startups = [
+            {title: 'Erudemy - 96', description: 'Connects students to tutoring, skills, and micro-loans for empowerment'}, 
+            {title: 'LowerBasement - 97', description: 'Freelance unregistered startup'}, 
+            {title: 'SafeSight - 98', description: 'AI based surveillance system for all scenarios'}, 
+            {title: 'Internect - 99', description: 'One-click automation for internship applications'}, 
+            {title: 'SMIT Varun sir - (100-106)', description: 'Srishti Institute of Art, Design and Technology, Bangalore'}, 
+            {title: 'TACIT - 107', description: 'Tacit provides student-focused mental health support, addressing academic pressure, family expectations, and career uncertainties in a safe, stigma-free space.'}, 
+            {title: 'Pazham - 108', description: 'Providing healthy fruit powders at minimum cost to foster a healthy society'}, 
+            {title: 'ColCord - 109', description: 'Seamlessly connecting academics and campus life'}, 
+            {title: 'WEAVESPACE - 110', description: 'WeaveSpace: Smarter Sourcing & Manufacturing for SMEs'}, 
+            {title: 'Improve - 111', description: 'Improve: Distraction-free self-improvement videos'}, 
+            {title: 'vakeel.ai - 112', description: 'Freelance unregistered startup'}, 
+            {title: 'KISAN SATHI - 113', description: 'Freelance unregistered startup'}, 
+            {title: 'SolarLink Wearables - 114', description: 'Freelance unregistered startup'}, 
+            {title: 'WizVerx - 115', description: 'Freelance unregistered startup'}, 
+            {title: 'Shresht Organic - 116', description: 'Freelance unregistered startup'}, 
+            {title: 'Sauvaat - 117', description: 'Freelance unregistered startup'}
+        ];
+
+        const startupList = document.getElementById("startupList");
+        const descriptionBox = document.getElementById("descriptionBox");
+        let activeButton = null;
+
+        // Show initial description box
+        descriptionBox.classList.add("visible");
+
+        startups.forEach(startup => {
+            const button = document.createElement("button");
+            button.className = "startup-button";
+            button.textContent = startup.title;
+            
+            button.addEventListener("click", () => {
+                if (activeButton) {
+                    activeButton.classList.remove("active");
+                }
+                button.classList.add("active");
+                activeButton = button;
+                
+                // Fade out
+                descriptionBox.classList.remove("visible");
+                
+                // Update content and fade in after a short delay
+                setTimeout(() => {
+                    descriptionBox.textContent = startup.description;
+                    descriptionBox.classList.add("visible");
+                }, 300);
+            });
+            
+            startupList.appendChild(button);
+        });
+    </script>
+</body>
+</html>
